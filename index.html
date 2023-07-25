@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <form>
+        <label for="day">DAY</label>
+        <input type="number" required min="1" max="31" id="day" title="Απαιτείται ένας αριθμός απο το 1-31">
+        <p class="error"></p>
+        <label for="month">MONTH</label>
+        <input type="number" required min="1" max="12" id="month" title="Απαιτείται ένας αριθμός απο το 1-12">
+
+        <label for="year">YEAR</label>
+        <input type="number" required min="1000" max="9999" id="year" title="Must be in past">
+
+        <button type="submit">CLICK ME</button>
+    </form>
+
+    <script>
+        const errormessages = document.querySelectorAll('.error');
+        const inputs = document.querySelectorAll("input[type='number']");
+        const submit = document.querySelector('button');
+
+        function validate(e) {
+            e.preventDefault();
+            if (!inputs[0].checkValidity() ||
+                !inputs[1].checkValidity() ||
+                !inputs[2].checkValidity()) {
+                errormessages[0].innerText = inputs[0].validationMessage;
+            }
+            else if (inputs[2].value > new Date().getFullYear()) {
+                alert('invalid');
+            }
+            else {
+                alert('valid');
+            }
+        }
+
+        submit.addEventListener("click", validate)
+
+    </script>
+</body>
+
+</html>
